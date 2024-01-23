@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+{% load static %}
+<link href="{% static '../static/css/lista_resultado.css' %}" rel="stylesheet">
+
+<div class="resultado-grid" style="display: flex; justify-content: center;">
+    <div class="resultado-card">
+        <h2>{{ object.edital }} - {{ object.numero_licitacao }}</h2>
+        <p><strong>Objeto:</strong> <span>{{ object.objeto }}</span></p>
+        <p><strong>Processo:</strong> <span>{{ object.processo }}</span></p>
+        <p><strong>Edital Online:</strong> <span>{{ object.edital_online }}</span></p>
+        <p><strong>Datas:</strong> <span>{{ object.datas }}</span></p>
+        <p><strong>Observação:</strong> <span>{{ object.observacao }}</span></p>
+        <p><strong>Unidade Licitante:</strong> <span>{{ object.unidade_licitante }}</span></p>
+        <p><strong>Endereço:</strong> <span>{{ object.endereco }}</span></p>
+        <p><strong>CEP:</strong> <span>{{ object.cep }}</span></p>
+        <p><strong>Cidade:</strong> <span>{{ object.cidade }}</span></p>
+        <p><strong>Descrição:</strong> <span>{{ object.descricao }}</span></p>
+        <p><strong>Data de Criação:</strong> <span>{{ object.data_de_criacao }}</span></p>
+        <p><strong>Data de Atualização:</strong> <span>{{ object.data_de_atualizacao }}</span></p>
+        {% if user.is_authenticated %}
+        <div style="display: flex; justify-content: space-around; margin: 20px;">
+            <a href="{% url 'resultado_update' pk=object.pk %}" class="btn btn-primary">Atualizar</a>
+            <a href="{% url 'resultado_delete' pk=object.pk %}" class="btn btn-danger">Deletar</a>
+            <a href="{% url 'lista_resultado' %}" class="btn btn-secondary">Voltar</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</html>
+{% endblock %}

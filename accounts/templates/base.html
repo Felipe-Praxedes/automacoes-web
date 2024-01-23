@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultado</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{% load static %}
+<link href="{% static '../static/css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+	<div class="navigation">
+		<ul>
+			{% if user.is_authenticated %}
+				<li>
+					<span class="title" style="margin-left: 60px;">Olá, {{ user.username }}</span>
+				</li>
+			{% else %}
+				<li>
+					<span class="title"> </span>
+				</li>
+			{% endif %}
+
+			<li>
+				<a href="/resultados/">
+					<span class="icon"><i class="fa fa-comment" aria-hidden="true"></i></span>
+					<span class="title">Lista de objetos</span>
+				</a>
+			</li>
+			
+			{% if user.is_authenticated %}
+			<li>
+				<a href="/novo_resultado/">
+					<span class="icon"><i class="fa fa-file-word-o" aria-hidden="true"></i></span>
+					<span class="title">Cadastrar objeto</span>
+				</a>
+			</li>
+			<li>
+				<a href="/gerenciar_user/">
+					<span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+					<span class="title">Usuários</span>
+				</a>
+			</li>
+			<li>
+				<a href="/registrar/">
+					<span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+					<span class="title">Cadastrar Usuário</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="/logout/">
+					<span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+					<span class="title">Sair</span>
+				</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="/login/">
+					<span class="icon"><i class="fa fa-sign-in" aria-hidden="true"></i></span>
+					<span class="title">Entrar</span>
+				</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+	<div class="toggle" onclick="toggleMenu();" style="color: white;">
+	</div>
+
+	<div class="content">
+		{% block content %}
+		
+		{% endblock %}
+	</div>
+
+	<div style="align-content: center; text-align: center; color: rgb(0, 0, 0); margin-bottom: 40px;">
+		<br>
+		  <p style="color: rgb(165, 164, 164); font-size: 10px; color: rgb(0, 0, 0);">&copy; 2023 Desenvolvido por: Professional wise to code (PW2C)<br> Todos os direitos reservados.</p>
+		  <p style="color: rgb(165, 164, 164); font-size: 11px; color: rgb(0, 0, 0);" >Suporte:<br> Geovanne (11) 95284-2140</p>
+	  </div>
+
+	<script type="text/javascript">
+		function toggleMenu(){
+			let navigation = document.querySelector('.navigation');
+			let toggleMenu = document.querySelector('.toggle');
+			navigation.classList.toggle('active');
+			toggleMenu.classList.toggle('active');
+		}
+	</script>
+</body>
+</html>

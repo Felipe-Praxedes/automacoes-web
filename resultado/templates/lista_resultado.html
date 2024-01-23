@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+<link href="{% static '../static/css/lista_resultado.css' %}" rel="stylesheet">
+
+  <form method="GET" action="{% url 'lista_resultado' %}">
+    <input type="text" name="search" placeholder="Buscar objeto...">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="resultado-grid" style="margin-left: 100px;">
+    {% if resultados %}
+      {% for resultado in resultados %}
+      <a href="{% url 'resultado_detalhe' resultado.pk %}" style="text-decoration: none; color: #2f2e2e;">
+        <div class="resultado-card">
+          <h2>{{ resultado.edital }} - {{ resultado.numero_licitacao }}</h2>
+          <p><strong>Objeto:</strong> <span>{{ resultado.objeto }}</span></p>
+            <p><strong>Processo:</strong> <span>{{ resultado.processo }}</span></p>
+            <p><strong>Edital Online:</strong> <span>{{ resultado.edital_online }}</span></p>
+            <p><strong>Datas:</strong> <span>{{ resultado.datas }}</span></p>
+            <p><strong>Observação:</strong> <span>{{ resultado.observacao }}</span></p>
+            <p><strong>Unidade Licitante:</strong> <span>{{ resultado.unidade_licitante }}</span></p>
+            <p><strong>Endereço:</strong> <span>{{ resultado.endereco }}</span></p>
+            <p><strong>CEP:</strong> <span>{{ resultado.cep }}</span></p>
+            <p><strong>Cidade:</strong> <span>{{ resultado.cidade }}</span></p>
+            <p><strong>Descrição:</strong> <span>{{ resultado.descricao }}</span></p>
+            <p><strong>Data de Criação:</strong> <span>{{ resultado.data_de_criacao }}</span></p>
+            <p><strong>Data de Atualização:</strong> <span>{{ resultado.data_de_atualizacao }}</span></p>
+          </div>
+        </a>
+      {% endfor %}
+    {% else %}
+      <p class="no-results">Nenhum resultado encontrado.</p>
+    {% endif %}
+  </div>
+{% endblock %}
